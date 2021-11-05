@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'canadaProductFront';
+  showTable = true;
+
+  changeShowTable(value:any) {
+    console.log(value)
+    this.showTable = value
+  }
 }

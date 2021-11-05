@@ -8,11 +8,19 @@ import { ProductXService } from '../service/productX.service';
 })
 export class ListProductXComponent implements OnInit {
 
+  displayedColumns: string[] = ['id', 'email', 'count', 'discountCode'];
+  dataSource:any = [];
+
   constructor(
     private productXService: ProductXService
   ) { }
 
   ngOnInit(): void {
+    this.productXService.list().subscribe(data => {
+      this.dataSource = data;
+    }, error => {
+      console.log("error getting products list")
+    })
   }
 
 }

@@ -15,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from "@angular/material/card";
 import { ListProductXComponent } from './list-product-x/list-product-x.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatInputModule,
     MatButtonModule,
     MatCardModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTableModule
   ],
   providers: [
     ProductXService,

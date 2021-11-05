@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProductX } from '../model/productX';
@@ -16,6 +16,7 @@ export class NewProductXComponent implements OnInit {
     discountCode: ['']
   });
   emailFormControl = new FormControl('', [Validators.required, Validators.email])
+  @Output() showTable = new EventEmitter();
   constructor(
     private fb: FormBuilder,
     private productXService: ProductXService,
@@ -32,13 +33,20 @@ export class NewProductXComponent implements OnInit {
     product.count = this.form.controls.count.value
     product.discountCode = this.form.controls.discountCode.value
 
+    this.toggleTable(false);
     this.productXService.save(product).subscribe(data => {
       this._snackBar.open(data.message, "X")
       console.log("response", data)
+      this.toggleTable(true);
     }, error => {
+      this.toggleTable(true);
       this._snackBar.open(error.error.message, "X")
     })
     console.log("saving")
+  }
+
+  toggleTable(status:any) {
+    this.showTable.emit(status);
   }
 
   getDiscount() {
